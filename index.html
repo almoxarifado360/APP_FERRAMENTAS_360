@@ -1,0 +1,3121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <base target="_top">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Controle de Ferramentas</title>
+
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+
+    body {
+
+      margin: 0;
+
+      padding: 0;
+
+      background: #eef4fa;
+
+      font-family: Arial, sans-serif;
+
+      color: #111827;
+
+      min-width: 0;
+
+      overflow-x: hidden;
+
+    }
+
+
+    .container {
+
+      max-width: 980px;
+
+      margin: auto;
+
+      width: 100%;
+
+    }
+
+
+    .cabecalho {
+
+      position: relative;
+
+      overflow: hidden;
+
+      min-height: 260px;
+
+      padding: 38px 20px 42px;
+
+      margin-bottom: 24px;
+
+      text-align: center;
+
+      background: #123d7a;
+
+      border-radius: 0 0 34px 34px;
+
+      box-shadow: 0 8px 22px rgba(15, 48, 91, .18);
+
+    }
+
+
+    .cabecalho::before {
+
+      content: '';
+
+      position: absolute;
+
+      inset: 0;
+
+      background-image: url('https://drive.google.com/uc?id=1ka1jWlKGV9siuUe0XgQdbSXBR-RsC8d9&export=download');
+
+      background-repeat: no-repeat;
+
+      background-position: center 38%;
+
+      background-size: 300px auto;
+
+      opacity: .22;
+
+      pointer-events: none;
+
+    }
+
+
+    .cabecalho::after {
+
+      content: '';
+
+      position: absolute;
+
+      left: 0;
+
+      right: 0;
+
+      bottom: 0;
+
+      height: 3px;
+
+      background: #00a9ee;
+
+    }
+
+
+    .cabecalho > * {
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+    .cabecalho h1 {
+
+      margin: 92px 0 0;
+
+      font-size: 34px;
+
+      font-weight: 800;
+
+      letter-spacing: .4px;
+
+      color: #fff;
+
+      text-shadow: 0 2px 5px rgba(0,0,0,.18);
+
+    }
+
+
+    .cabecalho p {
+
+      margin: 8px 0 0;
+
+      color: #fff;
+
+      font-size: 18px;
+
+      font-weight: 500;
+
+    }
+
+
+
+    .menu {
+
+      display: grid;
+
+      grid-template-columns: repeat(5, 1fr);
+
+      gap: 14px;
+
+      margin: 0 0 24px;
+
+      padding: 0 8px;
+
+    }
+
+
+    .menu button {
+
+      min-height: 70px;
+
+      border: none;
+
+      border-radius: 22px;
+
+      background: #fff;
+
+      color: #111827;
+
+      font-weight: 800;
+
+      font-size: 14px;
+
+      box-shadow: 0 5px 16px rgba(21, 55, 95, .10);
+
+      cursor: pointer;
+
+      transition: transform .15s ease, box-shadow .15s ease;
+
+    }
+
+
+    .menu button:hover {
+
+      transform: translateY(-1px);
+
+      box-shadow: 0 7px 18px rgba(21, 55, 95, .14);
+
+    }
+
+
+    .menu button.ativo {
+
+      background: #1766d1;
+
+      color: #fff;
+
+    }
+
+
+    .card {
+
+      background: #fff;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      margin: 0 8px 14px;
+
+      box-shadow: 0 5px 18px rgba(21, 55, 95, .08);
+
+    }
+
+
+    .titulo {
+
+      margin: 0 0 15px;
+
+      font-size: 21px;
+
+    }
+
+
+    .subtitulo {
+
+      margin: 0 0 12px;
+
+      color: #666;
+
+      font-size: 14px;
+
+    }
+
+
+    .campo {
+
+      margin-bottom: 16px;
+
+    }
+
+
+    label {
+
+      display: block;
+
+      font-weight: bold;
+
+      margin-bottom: 7px;
+
+    }
+
+
+    select,
+
+    input,
+
+    textarea {
+
+      width: 100%;
+
+      padding: 14px;
+
+      border: 1px solid #c9c9c9;
+
+      border-radius: 9px;
+
+      font-size: 17px;
+
+      background: #fff;
+
+    }
+
+
+    textarea {
+
+      min-height: 85px;
+
+      resize: vertical;
+
+    }
+
+
+    .ferramenta {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .ferramenta select {
+
+      flex: 1;
+
+    }
+
+
+    .botao {
+
+      width: 100%;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+
+    .primario {
+
+      background: #0b57d0;
+
+      color: #fff;
+
+    }
+
+
+    .secundario {
+
+      background: #eee;
+
+      color: #222;
+
+    }
+
+
+    .perigo {
+
+      background: #e53935;
+
+      color: #fff;
+
+      width: 48px;
+
+      padding: 0;
+
+      font-size: 22px;
+
+    }
+
+
+    .adicionar {
+
+      border: 2px dashed #aaa;
+
+      background: #fff;
+
+      color: #222;
+
+    }
+
+
+    .assinatura-area {
+
+      border: 2px solid #999;
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      background: #fff;
+
+    }
+
+
+    #canvasAssinatura,
+    #canvasAssinaturaDevolucao {
+
+      width: 100%;
+
+      height: 220px;
+
+      display: block;
+
+      touch-action: none;
+
+      -webkit-user-select: none;
+
+      user-select: none;
+
+      -webkit-touch-callout: none;
+
+    }
+
+
+    .assinatura-aviso {
+
+      text-align: center;
+
+      color: #777;
+
+      font-size: 13px;
+
+      padding: 7px;
+
+      border-top: 1px solid #eee;
+
+    }
+
+
+    .mensagem {
+
+      display: none;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      margin-bottom: 12px;
+
+      text-align: center;
+
+      font-weight: bold;
+
+      white-space: pre-line;
+
+    }
+
+
+    .sucesso {
+
+      display: block;
+
+      background: #d9f7df;
+
+      color: #146c2e;
+
+    }
+
+
+    .erro {
+
+      display: block;
+
+      background: #fde0e0;
+
+      color: #a40000;
+
+    }
+
+
+    .carregando {
+
+      text-align: center;
+
+      padding: 30px;
+
+      font-weight: bold;
+
+    }
+
+
+    .posse-item {
+
+      border: 1px solid #ddd;
+
+      border-radius: 10px;
+
+      padding: 13px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .posse-item strong {
+
+      display: block;
+
+      font-size: 16px;
+
+    }
+
+
+    .posse-meta {
+
+      margin-top: 5px;
+
+      color: #666;
+
+      font-size: 13px;
+
+    }
+
+
+    .retorno-item {
+
+      border: 1px solid #ddd;
+
+      border-radius: 10px;
+
+      padding: 13px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .retorno-topo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .retorno-topo input {
+
+      width: 24px;
+
+      height: 24px;
+
+    }
+
+
+    .retorno-topo strong {
+
+      flex: 1;
+
+    }
+
+
+    .condicao {
+
+      margin-top: 8px;
+
+    }
+
+
+    .vazio {
+
+      text-align: center;
+
+      color: #777;
+
+      padding: 20px 5px;
+
+    }
+
+
+    .historico {
+
+      overflow-x: auto;
+
+    }
+
+
+    .linha-historico {
+
+      border-bottom: 1px solid #eee;
+
+      padding: 11px 0;
+
+    }
+
+
+    .linha-historico:last-child {
+
+      border-bottom: none;
+
+    }
+
+
+    .badge {
+
+      display: inline-block;
+
+      padding: 4px 7px;
+
+      border-radius: 10px;
+
+      font-size: 11px;
+
+      font-weight: bold;
+
+      background: #eee;
+
+      margin-right: 5px;
+
+    }
+
+
+    .assinatura-box {
+
+      margin-top: 12px;
+
+    }
+
+    .resumo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .resumo-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 16px 10px;
+      text-align: center;
+      background: #f8fbff;
+    }
+
+    .resumo-numero {
+      font-size: 26px;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    .resumo-legenda {
+      margin-top: 5px;
+      color: #666;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .alerta-atrasada {
+      border: 2px solid #e53935;
+      background: #fff5f5;
+    }
+
+    .badge-atrasada {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 8px;
+      border-radius: 10px;
+      background: #e53935;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .filtros-historico {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .filtro-largo {
+      grid-column: 1 / -1;
+    }
+
+    .botao-pequeno {
+      padding: 12px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 700px) {
+      .resumo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
+    @media (max-width: 700px) {
+
+      .cabecalho {
+        min-height: 235px;
+        padding: 28px 14px 34px;
+      }
+
+      .cabecalho::before {
+        background-size: 245px auto;
+        background-position: center 35%;
+      }
+
+      .cabecalho h1 {
+        margin-top: 82px;
+        font-size: 28px;
+      }
+
+      .cabecalho p {
+        font-size: 15px;
+      }
+
+      .menu {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0 6px;
+      }
+
+    }
+
+
+    @media (max-width: 560px) {
+
+      .menu {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu button {
+        min-height: 66px;
+        font-size: 13px;
+        border-radius: 18px;
+      }
+
+      .botao {
+        min-height: 52px;
+      }
+
+      .cabecalho {
+        min-height: 220px;
+        border-radius: 0 0 28px 28px;
+      }
+
+      .cabecalho h1 {
+        font-size: 24px;
+        margin-top: 78px;
+      }
+
+      .cabecalho p {
+        font-size: 14px;
+      }
+
+      .card {
+        margin-left: 6px;
+        margin-right: 6px;
+        padding: 14px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <div class="cabecalho">
+
+    <h1>🔧 CONTROLE DE FERRAMENTAS</h1>
+
+    <p>Saída, devolução e controle das ferramentas</p>
+
+  </div>
+
+
+  <div class="menu">
+
+    <button id="menuInicio" onclick="abrirTela('inicio')">
+
+      🏠<br>INÍCIO
+
+    </button>
+
+    <button id="menuSaida" onclick="abrirTela('saida')">
+
+      📤<br>SAÍDA
+
+    </button>
+
+
+    <button id="menuDevolucao" onclick="abrirTela('devolucao')">
+
+      📥<br>DEVOLUÇÃO
+
+    </button>
+
+
+    <button id="menuPosse" onclick="abrirTela('posse')">
+
+      👷<br>EM POSSE
+
+    </button>
+
+
+    <button id="menuHistorico" onclick="abrirTela('historico')">
+
+      📋<br>HISTÓRICO
+
+    </button>
+
+  </div>
+
+
+  <div id="mensagem" class="mensagem"></div>
+
+
+  <div id="carregando" class="carregando">
+
+    Carregando sistema...
+
+  </div>
+
+
+  <div id="telaInicio" style="display:none;">
+
+    <div class="card">
+      <h2 class="titulo">🏠 Resumo do estoque</h2>
+      <p class="subtitulo">Visão rápida das ferramentas e das devoluções.</p>
+
+      <div class="resumo-grid">
+        <div class="resumo-card">
+          <div id="resumoTotal" class="resumo-numero">0</div>
+          <div class="resumo-legenda">TOTAL</div>
+        </div>
+        <div class="resumo-card">
+          <div id="resumoDisponiveis" class="resumo-numero">0</div>
+          <div class="resumo-legenda">DISPONÍVEIS</div>
+        </div>
+        <div class="resumo-card">
+          <div id="resumoPosse" class="resumo-numero">0</div>
+          <div class="resumo-legenda">EM POSSE</div>
+        </div>
+        <div class="resumo-card alerta-atrasada">
+          <div id="resumoAtrasadas" class="resumo-numero">0</div>
+          <div class="resumo-legenda">ATRASADAS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="resumoMensagem" class="vazio">Carregando resumo...</div>
+      <button type="button" class="botao secundario botao-pequeno" onclick="atualizarDadosLocais()">
+        🔄 ATUALIZAR DADOS
+      </button>
+    </div>
+
+  </div>
+
+
+  <div id="telaSaida" style="display:none;">
+
+
+    <div class="card">
+
+      <h2 class="titulo">📤 Saída de ferramentas</h2>
+
+      <p class="subtitulo">
+
+        O estoque registra a retirada. O colaborador assina ao final.
+
+      </p>
+
+
+      <div class="campo">
+
+        <label>Colaborador</label>
+
+        <select id="colaboradorSaida">
+
+          <option value="">Selecione o colaborador</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>Tarefa / OS</label>
+
+        <input
+
+          type="text"
+
+          id="tarefaSaida"
+
+          placeholder="Ex.: tarefa 79047972 ou OS 4431">
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <label>Ferramentas retiradas</label>
+
+
+      <div id="listaFerramentas"></div>
+
+
+      <button
+
+        type="button"
+
+        class="botao adicionar"
+
+        onclick="adicionarFerramenta()">
+
+        ＋ ADICIONAR FERRAMENTA
+
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="campo">
+
+        <label>Observação</label>
+
+        <textarea
+
+          id="observacaoSaida"
+
+          placeholder="Observação, se necessário..."></textarea>
+
+      </div>
+
+
+      <div class="assinatura-box">
+
+        <label>✍️ Assinatura do colaborador</label>
+
+
+        <div class="assinatura-area">
+
+          <canvas id="canvasAssinatura"></canvas>
+
+          <div class="assinatura-aviso">
+
+            O colaborador deve assinar dentro do quadro.
+
+          </div>
+
+          <button
+
+            type="button"
+
+            class="botao secundario"
+
+            onclick="limparAssinatura()">
+
+            LIMPAR ASSINATURA
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <button
+
+        type="button"
+
+        id="botaoConfirmarSaida"
+
+        class="botao primario"
+
+        onclick="confirmarSaida()">
+
+        ✓ CONFIRMAR SAÍDA
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div id="telaDevolucao" style="display:none;">
+
+
+    <div class="card">
+
+      <h2 class="titulo">📥 Devolução de ferramentas</h2>
+
+      <p class="subtitulo">
+
+        Confira fisicamente as ferramentas antes de confirmar.
+
+      </p>
+
+
+      <div class="campo">
+
+        <label>Colaborador</label>
+
+        <select
+
+          id="colaboradorDevolucao"
+
+          onchange="carregarFerramentasDevolucao()">
+
+          <option value="">Selecione o colaborador</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <label>Ferramentas em posse</label>
+
+
+      <div id="listaDevolucao">
+
+        <div class="vazio">
+
+          Selecione um colaborador para consultar.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div id="areaDevolucao" style="display:none;">
+
+
+      <div class="card">
+
+        <div class="campo">
+
+          <label>Observação da devolução</label>
+
+          <textarea
+
+            id="observacaoDevolucao"
+
+            placeholder="Ex.: ferramenta devolvida limpa..."></textarea>
+
+        </div>
+
+
+        <label>✍️ Assinatura do colaborador</label>
+
+
+        <div class="assinatura-area">
+
+          <canvas id="canvasAssinaturaDevolucao"></canvas>
+
+          <div class="assinatura-aviso">
+
+            O colaborador deve assinar confirmando a devolução.
+
+          </div>
+
+          <button
+
+            type="button"
+
+            class="botao secundario"
+
+            onclick="limparAssinaturaDevolucao()">
+
+            LIMPAR ASSINATURA
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <button
+
+          type="button"
+
+          id="botaoConfirmarDevolucao"
+
+          class="botao primario"
+
+          onclick="confirmarDevolucao()">
+
+          ✓ CONFIRMAR DEVOLUÇÃO
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <div id="telaPosse" style="display:none;">
+
+
+    <div class="card">
+
+      <h2 class="titulo">👷 Ferramentas em posse</h2>
+
+      <p class="subtitulo">
+
+        Consulte rapidamente quais ferramentas estão fora do estoque.
+
+      </p>
+
+
+      <div class="campo">
+
+        <label>Filtrar por colaborador</label>
+
+        <select
+
+          id="filtroPosse"
+
+          onchange="renderizarPosse()">
+
+          <option value="">Todos os colaboradores</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div id="listaPosse"></div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div id="telaHistorico" style="display:none;">
+
+
+    <div class="card">
+
+      <h2 class="titulo">📋 Histórico</h2>
+
+      <p class="subtitulo">Consulte saídas e devoluções por colaborador, tipo ou texto.</p>
+
+      <div class="filtros-historico">
+        <div class="campo">
+          <label>Tipo</label>
+          <select id="filtroHistoricoTipo">
+            <option value="">Todos</option>
+            <option value="SAÍDA">SAÍDA</option>
+            <option value="DEVOLUÇÃO">DEVOLUÇÃO</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label>Colaborador</label>
+          <select id="filtroHistoricoColaborador">
+            <option value="">Todos</option>
+          </select>
+        </div>
+
+        <div class="campo filtro-largo">
+          <label>Buscar</label>
+          <input id="filtroHistoricoBusca" type="search" placeholder="Código, ferramenta, OS/tarefa ou observação">
+        </div>
+      </div>
+
+      <button type="button" class="botao secundario botao-pequeno" onclick="carregarHistorico()">
+        🔄 CONSULTAR HISTÓRICO
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div id="listaHistorico" class="historico">
+
+        <div class="vazio">Carregando...</div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+  let ferramentas = [];
+
+  let ferramentasTodas = [];
+
+  let colaboradores = [];
+
+  let posse = [];
+  let resumo = { total: 0, disponiveis: 0, emPosse: 0, atrasadas: 0, colaboradoresComFerramentas: 0, prazoHoras: 24 };
+
+
+  let canvasSaida;
+
+  let ctxSaida;
+
+  let desenhandoSaida = false;
+
+  let assinaturaSaidaExiste = false;
+
+
+  let canvasDevolucao;
+
+  let ctxDevolucao;
+
+  let desenhandoDevolucao = false;
+
+  let assinaturaDevolucaoExiste = false;
+
+
+
+  /**************************************************
+
+   * INICIALIZAÇÃO
+
+   **************************************************/
+
+  window.onload = function() {
+
+    inicializarCanvasSaida();
+
+    inicializarCanvasDevolucao();
+
+
+    google.script.run
+
+      .withSuccessHandler(carregarSistema)
+
+      .withFailureHandler(mostrarErro)
+
+      .carregarDados();
+
+  };
+
+
+
+  function carregarSistema(dados) {
+
+    ferramentas = dados.ferramentas || [];
+
+    ferramentasTodas = dados.ferramentasTodas || [];
+
+    colaboradores = dados.colaboradores || [];
+
+    posse = dados.posse || [];
+    resumo = dados.resumo || resumo;
+
+
+    preencherColaboradores();
+    preencherFiltroHistoricoColaboradores();
+    renderizarResumo();
+
+
+    document.getElementById('carregando').style.display = 'none';
+
+
+    abrirTela('inicio');
+
+  }
+
+
+
+  /**************************************************
+
+   * MENU
+
+   **************************************************/
+
+  function abrirTela(tela) {
+
+    esconderMensagem();
+
+
+    document.getElementById('telaInicio').style.display = 'none';
+    document.getElementById('telaSaida').style.display = 'none';
+
+    document.getElementById('telaDevolucao').style.display = 'none';
+
+    document.getElementById('telaPosse').style.display = 'none';
+
+    document.getElementById('telaHistorico').style.display = 'none';
+
+
+    document.getElementById('menuInicio').classList.remove('ativo');
+    document.getElementById('menuSaida').classList.remove('ativo');
+
+    document.getElementById('menuDevolucao').classList.remove('ativo');
+
+    document.getElementById('menuPosse').classList.remove('ativo');
+
+    document.getElementById('menuHistorico').classList.remove('ativo');
+
+
+    if (tela === 'inicio') {
+
+      document.getElementById('telaInicio').style.display = 'block';
+      document.getElementById('menuInicio').classList.add('ativo');
+      renderizarResumo();
+
+    } else if (tela === 'saida') {
+
+      document.getElementById('telaSaida').style.display = 'block';
+
+      document.getElementById('menuSaida').classList.add('ativo');
+
+
+      requestAnimationFrame(function() {
+        ajustarCanvasSaida();
+      });
+
+      if (!document.querySelector('.select-ferramenta')) {
+
+        adicionarFerramenta();
+
+      }
+
+
+    } else if (tela === 'devolucao') {
+
+      document.getElementById('telaDevolucao').style.display = 'block';
+
+      document.getElementById('menuDevolucao').classList.add('ativo');
+
+      // O canvas da devolução começa dentro de uma tela oculta.
+      // Depois que a tela fica visível, recalculamos o tamanho real.
+      requestAnimationFrame(function() {
+        ajustarCanvasDevolucao();
+      });
+
+    } else if (tela === 'posse') {
+
+      document.getElementById('telaPosse').style.display = 'block';
+
+      document.getElementById('menuPosse').classList.add('ativo');
+
+
+      renderizarPosse();
+
+
+    } else if (tela === 'historico') {
+
+      document.getElementById('telaHistorico').style.display = 'block';
+
+      document.getElementById('menuHistorico').classList.add('ativo');
+
+
+      carregarHistorico();
+
+    }
+
+  }
+
+
+
+  /**************************************************
+
+   * COLABORADORES
+
+   **************************************************/
+
+  function preencherColaboradores() {
+
+    const saida =
+
+      document.getElementById('colaboradorSaida');
+
+
+    const devolucao =
+
+      document.getElementById('colaboradorDevolucao');
+
+
+    const filtro =
+
+      document.getElementById('filtroPosse');
+
+
+    saida.innerHTML =
+
+      '<option value="">Selecione o colaborador</option>';
+
+
+    devolucao.innerHTML =
+
+      '<option value="">Selecione o colaborador</option>';
+
+
+    filtro.innerHTML =
+
+      '<option value="">Todos os colaboradores</option>';
+
+
+    colaboradores.forEach(function(colaborador) {
+
+      const option1 = document.createElement('option');
+
+      option1.value = colaborador.nome;
+
+      option1.textContent = colaborador.nome;
+
+      saida.appendChild(option1);
+
+
+      const option2 = document.createElement('option');
+
+      option2.value = colaborador.nome;
+
+      option2.textContent = colaborador.nome;
+
+      devolucao.appendChild(option2);
+
+
+      const option3 = document.createElement('option');
+
+      option3.value = colaborador.nome;
+
+      option3.textContent = colaborador.nome;
+
+      filtro.appendChild(option3);
+
+    });
+
+  }
+
+
+
+  function preencherFiltroHistoricoColaboradores() {
+    const filtro = document.getElementById('filtroHistoricoColaborador');
+    if (!filtro) return;
+
+    const valorAtual = filtro.value;
+    filtro.innerHTML = '<option value="">Todos</option>';
+
+    colaboradores.forEach(function(colaborador) {
+      const option = document.createElement('option');
+      option.value = colaborador.nome;
+      option.textContent = colaborador.nome;
+      filtro.appendChild(option);
+    });
+
+    if ([...filtro.options].some(function(o) { return o.value === valorAtual; })) {
+      filtro.value = valorAtual;
+    }
+  }
+
+  function renderizarResumo() {
+    const mapa = {
+      resumoTotal: resumo.total || 0,
+      resumoDisponiveis: resumo.disponiveis || 0,
+      resumoPosse: resumo.emPosse || 0,
+      resumoAtrasadas: resumo.atrasadas || 0
+    };
+
+    Object.keys(mapa).forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = mapa[id];
+    });
+
+    const msg = document.getElementById('resumoMensagem');
+    if (!msg) return;
+
+    if ((resumo.atrasadas || 0) > 0) {
+      msg.innerHTML = '⚠️ Existem <strong>' + resumo.atrasadas + '</strong> ferramenta(s) com devolução atrasada. Prazo de referência: <strong>' + (resumo.prazoHoras || 24) + ' horas</strong>.';
+    } else {
+      msg.innerHTML = '✅ Nenhuma devolução atrasada. Prazo de referência: <strong>' + (resumo.prazoHoras || 24) + ' horas</strong>.';
+    }
+  }
+
+
+  /**************************************************
+
+   * SAÍDA — FERRAMENTAS
+
+   **************************************************/
+
+  function adicionarFerramenta() {
+
+    const lista =
+
+      document.getElementById('listaFerramentas');
+
+
+    const div =
+
+      document.createElement('div');
+
+
+    div.className = 'ferramenta';
+
+
+    const select =
+
+      document.createElement('select');
+
+
+    select.className =
+
+      'select-ferramenta';
+
+
+    const inicial =
+
+      document.createElement('option');
+
+
+    inicial.value = '';
+
+    inicial.textContent =
+
+      'Selecione a ferramenta';
+
+
+    select.appendChild(inicial);
+
+
+    ferramentas.forEach(function(ferramenta) {
+
+      const option =
+
+        document.createElement('option');
+
+
+      option.value =
+
+        ferramenta.codigo;
+
+
+      option.textContent =
+
+        ferramenta.codigo +
+
+        ' — ' +
+
+        ferramenta.nome;
+
+
+      option.dataset.nome =
+
+        ferramenta.nome;
+
+
+      select.appendChild(option);
+
+    });
+
+
+    const remover =
+
+      document.createElement('button');
+
+
+    remover.type = 'button';
+
+    remover.className = 'botao perigo';
+
+    remover.textContent = '×';
+
+
+    remover.onclick = function() {
+
+      div.remove();
+
+    };
+
+
+    div.appendChild(select);
+
+    div.appendChild(remover);
+
+
+    lista.appendChild(div);
+
+  }
+
+
+
+  /**************************************************
+
+   * ASSINATURA — SAÍDA
+
+   **************************************************/
+
+  function inicializarCanvasSaida() {
+
+    canvasSaida =
+
+      document.getElementById('canvasAssinatura');
+
+
+    ctxSaida =
+
+      canvasSaida.getContext('2d');
+
+
+    ajustarCanvasSaida();
+
+
+    window.addEventListener(
+
+      'resize',
+
+      ajustarCanvasSaida
+
+    );
+
+
+    canvasSaida.addEventListener(
+
+      'pointerdown',
+
+      iniciarDesenhoSaida
+
+    );
+
+
+    canvasSaida.addEventListener(
+
+      'pointermove',
+
+      desenharSaida
+
+    );
+
+
+    canvasSaida.addEventListener(
+
+      'pointerup',
+
+      finalizarDesenhoSaida
+
+    );
+
+
+    canvasSaida.addEventListener(
+
+      'pointerleave',
+
+      finalizarDesenhoSaida
+
+    );
+
+  }
+
+
+
+  function ajustarCanvasSaida() {
+
+    if (!canvasSaida) return;
+
+
+    const rect =
+
+      canvasSaida.getBoundingClientRect();
+
+
+    const imagem =
+
+      assinaturaSaidaExiste
+
+        ? canvasSaida.toDataURL()
+
+        : null;
+
+
+    canvasSaida.width = rect.width;
+
+    canvasSaida.height = 220;
+
+
+    ctxSaida.lineWidth = 2.5;
+
+    ctxSaida.lineCap = 'round';
+
+    ctxSaida.lineJoin = 'round';
+
+
+    if (imagem) {
+
+      const img = new Image();
+
+
+      img.onload = function() {
+
+        ctxSaida.drawImage(
+
+          img,
+
+          0,
+
+          0,
+
+          canvasSaida.width,
+
+          canvasSaida.height
+
+        );
+
+      };
+
+
+      img.src = imagem;
+
+    }
+
+  }
+
+
+
+  function iniciarDesenhoSaida(e) {
+
+    desenhandoSaida = true;
+
+    assinaturaSaidaExiste = true;
+
+
+    const pos =
+
+      obterPosicaoCanvas(
+
+        e,
+
+        canvasSaida
+
+      );
+
+
+    ctxSaida.beginPath();
+
+    ctxSaida.moveTo(pos.x, pos.y);
+
+  }
+
+
+
+  function desenharSaida(e) {
+
+    if (!desenhandoSaida) return;
+
+
+    const pos =
+
+      obterPosicaoCanvas(
+
+        e,
+
+        canvasSaida
+
+      );
+
+
+    ctxSaida.lineTo(pos.x, pos.y);
+
+    ctxSaida.stroke();
+
+  }
+
+
+
+  function finalizarDesenhoSaida() {
+
+    desenhandoSaida = false;
+
+  }
+
+
+
+  function limparAssinatura() {
+
+    ctxSaida.clearRect(
+
+      0,
+
+      0,
+
+      canvasSaida.width,
+
+      canvasSaida.height
+
+    );
+
+
+    assinaturaSaidaExiste = false;
+
+  }
+
+
+
+  /**************************************************
+
+   * CONFIRMA SAÍDA
+
+   **************************************************/
+
+  function confirmarSaida() {
+
+    esconderMensagem();
+
+
+    const colaborador =
+
+      document.getElementById(
+
+        'colaboradorSaida'
+
+      ).value;
+
+
+    const tarefa =
+
+      document.getElementById(
+
+        'tarefaSaida'
+
+      ).value.trim();
+
+
+    const observacao =
+
+      document.getElementById(
+
+        'observacaoSaida'
+
+      ).value.trim();
+
+
+    if (!colaborador) {
+
+      mostrarErro('Selecione o colaborador.');
+
+      return;
+
+    }
+
+
+    if (!tarefa) {
+
+      mostrarErro('Informe a tarefa ou OS.');
+
+      return;
+
+    }
+
+
+    const selects =
+
+      document.querySelectorAll(
+
+        '.select-ferramenta'
+
+      );
+
+
+    const selecionadas = [];
+
+    const codigos = {};
+
+
+    selects.forEach(function(select) {
+
+      if (!select.value) return;
+
+
+      if (codigos[select.value]) {
+
+        return;
+
+      }
+
+
+      const option =
+
+        select.options[select.selectedIndex];
+
+
+      selecionadas.push({
+
+        codigo: select.value,
+
+        nome: option.dataset.nome
+
+      });
+
+
+      codigos[select.value] = true;
+
+    });
+
+
+    if (selecionadas.length === 0) {
+
+      mostrarErro(
+
+        'Selecione pelo menos uma ferramenta.'
+
+      );
+
+      return;
+
+    }
+
+
+    if (!assinaturaSaidaExiste) {
+
+      mostrarErro(
+
+        'O colaborador precisa assinar.'
+
+      );
+
+      return;
+
+    }
+
+
+    const dados = {
+
+      colaborador: colaborador,
+
+      tarefa: tarefa,
+
+      ferramentas: selecionadas,
+
+      observacao: observacao,
+
+      assinatura:
+
+        canvasSaida.toDataURL('image/png')
+
+    };
+
+
+    const botao =
+
+      document.getElementById(
+
+        'botaoConfirmarSaida'
+
+      );
+
+
+    botao.disabled = true;
+
+    botao.textContent = 'REGISTRANDO...';
+
+
+    google.script.run
+
+      .withSuccessHandler(function(resultado) {
+
+
+        botao.disabled = false;
+
+        botao.textContent =
+
+          '✓ CONFIRMAR SAÍDA';
+
+
+        mostrarSucesso(
+
+          '✅ SAÍDA REGISTRADA\\n\\n' +
+
+          'Colaborador: ' +
+
+          resultado.colaborador +
+
+          '\\nTarefa: ' +
+
+          resultado.tarefa +
+
+          '\\nFerramentas: ' +
+
+          resultado.quantidade +
+
+          '\\nData/hora: ' +
+
+          resultado.dataHora
+
+        );
+
+
+        limparFormularioSaida();
+
+
+        atualizarDadosLocais();
+
+
+      })
+
+      .withFailureHandler(function(erro) {
+
+
+        botao.disabled = false;
+
+        botao.textContent =
+
+          '✓ CONFIRMAR SAÍDA';
+
+
+        mostrarErro(
+
+          erro.message ||
+
+          'Erro ao registrar saída.'
+
+        );
+
+
+      })
+
+      .registrarSaida(dados);
+
+  }
+
+
+
+  function limparFormularioSaida() {
+
+    document.getElementById(
+
+      'colaboradorSaida'
+
+    ).value = '';
+
+
+    document.getElementById(
+
+      'tarefaSaida'
+
+    ).value = '';
+
+
+    document.getElementById(
+
+      'observacaoSaida'
+
+    ).value = '';
+
+
+    document.getElementById(
+
+      'listaFerramentas'
+
+    ).innerHTML = '';
+
+
+    adicionarFerramenta();
+
+
+    limparAssinatura();
+
+  }
+
+
+
+  /**************************************************
+
+   * DEVOLUÇÃO
+
+   **************************************************/
+
+  function carregarFerramentasDevolucao() {
+
+    const colaborador =
+
+      document.getElementById(
+
+        'colaboradorDevolucao'
+
+      ).value;
+
+
+    const lista =
+
+      document.getElementById(
+
+        'listaDevolucao'
+
+      );
+
+
+    document.getElementById(
+
+      'areaDevolucao'
+
+    ).style.display = 'none';
+
+
+    limparAssinaturaDevolucao();
+
+
+    if (!colaborador) {
+
+      lista.innerHTML =
+
+        '<div class="vazio">' +
+
+        'Selecione um colaborador para consultar.' +
+
+        '</div>';
+
+
+      return;
+
+    }
+
+
+    lista.innerHTML =
+
+      '<div class="vazio">Consultando...</div>';
+
+
+    google.script.run
+
+      .withSuccessHandler(function(resultado) {
+
+
+        renderizarFerramentasDevolucao(resultado);
+
+
+      })
+
+      .withFailureHandler(mostrarErro)
+
+      .carregarPosseColaborador(colaborador);
+
+  }
+
+
+
+  function renderizarFerramentasDevolucao(lista) {
+
+    const area =
+
+      document.getElementById(
+
+        'listaDevolucao'
+
+      );
+
+
+    if (!lista || lista.length === 0) {
+
+
+      area.innerHTML =
+
+        '<div class="vazio">' +
+
+        '✅ Nenhuma ferramenta em posse deste colaborador.' +
+
+        '</div>';
+
+
+      document.getElementById(
+
+        'areaDevolucao'
+
+      ).style.display = 'none';
+
+
+      return;
+
+    }
+
+
+    area.innerHTML = '';
+
+
+    lista.forEach(function(item) {
+
+
+      const div =
+
+        document.createElement('div');
+
+
+      div.className =
+
+        'retorno-item';
+
+
+      div.innerHTML =
+
+        '<div class="retorno-topo">' +
+
+          '<input type="checkbox" ' +
+
+            'class="check-devolucao" ' +
+
+            'data-linha="' + item.linha + '" ' +
+
+            'data-codigo="' + escapeHtml(item.codigo) + '" ' +
+
+            'data-ferramenta="' + escapeHtml(item.ferramenta) + '" ' +
+
+            'data-tarefa="' + escapeHtml(item.tarefa) + '">' +
+
+
+          '<strong>' +
+
+            escapeHtml(item.codigo) +
+
+            ' — ' +
+
+            escapeHtml(item.ferramenta) +
+
+          '</strong>' +
+
+        '</div>' +
+
+
+        '<div class="posse-meta">' +
+
+          'OS/Tarefa: ' +
+
+          escapeHtml(item.tarefa) +
+
+          '<br>' +
+
+          'Saída: ' +
+
+          escapeHtml(item.dataSaida) +
+
+        '</div>' +
+
+
+        '<div class="condicao">' +
+
+          '<label>Condição na devolução</label>' +
+
+          '<select class="select-condicao" ' +
+
+            'data-codigo="' + escapeHtml(item.codigo) + '">' +
+
+            '<option value="Normal">Normal</option>' +
+
+            '<option value="Com avaria">Com avaria</option>' +
+
+            '<option value="Danificada">Danificada</option>' +
+
+            '<option value="Incompleta">Incompleta</option>' +
+
+            '<option value="Não funciona">Não funciona</option>' +
+
+            '<option value="Perdida">Perdida</option>' +
+
+          '</select>' +
+
+        '</div>';
+
+
+      area.appendChild(div);
+
+    });
+
+
+    document.getElementById(
+
+      'areaDevolucao'
+
+    ).style.display = 'block';
+
+  }
+
+
+
+  /**************************************************
+
+   * ASSINATURA — DEVOLUÇÃO
+
+   **************************************************/
+
+  function inicializarCanvasDevolucao() {
+
+    canvasDevolucao = document.getElementById('canvasAssinaturaDevolucao');
+
+    if (!canvasDevolucao) return;
+
+    ctxDevolucao = canvasDevolucao.getContext('2d');
+
+    ajustarCanvasDevolucao();
+
+    window.addEventListener('resize', ajustarCanvasDevolucao);
+
+    canvasDevolucao.addEventListener('pointerdown', iniciarDesenhoDevolucao, { passive: false });
+    canvasDevolucao.addEventListener('pointermove', desenharDevolucao, { passive: false });
+    canvasDevolucao.addEventListener('pointerup', finalizarDesenhoDevolucao, { passive: false });
+    canvasDevolucao.addEventListener('pointercancel', finalizarDesenhoDevolucao, { passive: false });
+    canvasDevolucao.addEventListener('pointerleave', finalizarDesenhoDevolucao, { passive: false });
+  }
+
+  function ajustarCanvasDevolucao() {
+
+    if (!canvasDevolucao) return;
+
+    const rect = canvasDevolucao.getBoundingClientRect();
+
+    // Se ainda estiver invisível, não mexe no canvas.
+    if (rect.width <= 0 || rect.height <= 0) return;
+
+    const imagem = assinaturaDevolucaoExiste && canvasDevolucao.width > 0
+      ? canvasDevolucao.toDataURL('image/png')
+      : null;
+
+    const larguraCSS = Math.max(1, Math.floor(rect.width));
+    const alturaCSS = 220;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+    canvasDevolucao.style.width = '100%';
+    canvasDevolucao.style.height = alturaCSS + 'px';
+    canvasDevolucao.width = Math.floor(larguraCSS * dpr);
+    canvasDevolucao.height = Math.floor(alturaCSS * dpr);
+
+    ctxDevolucao = canvasDevolucao.getContext('2d');
+    ctxDevolucao.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctxDevolucao.lineWidth = 2.5;
+    ctxDevolucao.lineCap = 'round';
+    ctxDevolucao.lineJoin = 'round';
+    ctxDevolucao.strokeStyle = '#111';
+
+    if (imagem) {
+      const img = new Image();
+      img.onload = function() {
+        ctxDevolucao.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctxDevolucao.drawImage(img, 0, 0, larguraCSS, alturaCSS);
+      };
+      img.src = imagem;
+    }
+  }
+
+  function iniciarDesenhoDevolucao(e) {
+
+    if (!canvasDevolucao || !ctxDevolucao) return;
+
+    e.preventDefault();
+
+    if (canvasDevolucao.setPointerCapture) {
+      try { canvasDevolucao.setPointerCapture(e.pointerId); } catch (erro) {}
+    }
+
+    desenhandoDevolucao = true;
+    assinaturaDevolucaoExiste = true;
+
+    const pos = obterPosicaoCanvas(e, canvasDevolucao);
+
+    ctxDevolucao.beginPath();
+    ctxDevolucao.moveTo(pos.x, pos.y);
+  }
+
+
+  function desenharDevolucao(e) {
+
+    if (!desenhandoDevolucao || !ctxDevolucao) return;
+
+    e.preventDefault();
+
+    const pos = obterPosicaoCanvas(e, canvasDevolucao);
+
+    ctxDevolucao.lineTo(pos.x, pos.y);
+    ctxDevolucao.stroke();
+  }
+
+
+  function finalizarDesenhoDevolucao(e) {
+
+    if (e && e.preventDefault) e.preventDefault();
+
+    desenhandoDevolucao = false;
+
+    if (e && canvasDevolucao && canvasDevolucao.releasePointerCapture) {
+      try { canvasDevolucao.releasePointerCapture(e.pointerId); } catch (erro) {}
+    }
+  }
+
+  function limparAssinaturaDevolucao() {
+
+    if (!ctxDevolucao) return;
+
+
+    ctxDevolucao.clearRect(
+
+      0,
+
+      0,
+
+      canvasDevolucao.width,
+
+      canvasDevolucao.height
+
+    );
+
+
+    assinaturaDevolucaoExiste = false;
+
+  }
+
+
+
+  /**************************************************
+
+   * CONFIRMA DEVOLUÇÃO
+
+   **************************************************/
+
+  function confirmarDevolucao() {
+
+    esconderMensagem();
+
+
+    const colaborador =
+
+      document.getElementById(
+
+        'colaboradorDevolucao'
+
+      ).value;
+
+
+    if (!colaborador) {
+
+      mostrarErro('Selecione o colaborador.');
+
+      return;
+
+    }
+
+
+    const checks =
+
+      document.querySelectorAll(
+
+        '.check-devolucao:checked'
+
+      );
+
+
+    if (!checks.length) {
+
+      mostrarErro(
+
+        'Selecione pelo menos uma ferramenta para devolver.'
+
+      );
+
+      return;
+
+    }
+
+
+    if (!assinaturaDevolucaoExiste) {
+
+      mostrarErro(
+
+        'O colaborador precisa assinar.'
+
+      );
+
+      return;
+
+    }
+
+
+    const ferramentasSelecionadas = [];
+
+
+    checks.forEach(function(check) {
+
+
+      const codigo =
+
+        check.dataset.codigo;
+
+
+      const condicaoSelect =
+
+        document.querySelector(
+
+          '.select-condicao[data-codigo="' +
+
+          cssEscape(codigo) +
+
+          '"]'
+
+        );
+
+
+      ferramentasSelecionadas.push({
+
+        codigo: codigo,
+
+        nome: check.dataset.ferramenta,
+
+        tarefa: check.dataset.tarefa,
+
+        condicao:
+
+          condicaoSelect
+
+            ? condicaoSelect.value
+
+            : 'Normal'
+
+      });
+
+    });
+
+
+    const dados = {
+
+      colaborador: colaborador,
+
+
+      ferramentas:
+
+        ferramentasSelecionadas,
+
+
+      observacao:
+
+        document.getElementById(
+
+          'observacaoDevolucao'
+
+        ).value.trim(),
+
+
+      assinatura:
+
+        canvasDevolucao.toDataURL('image/png')
+
+    };
+
+
+    const botao =
+
+      document.getElementById(
+
+        'botaoConfirmarDevolucao'
+
+      );
+
+
+    botao.disabled = true;
+
+    botao.textContent =
+
+      'REGISTRANDO...';
+
+
+    google.script.run
+
+      .withSuccessHandler(function(resultado) {
+
+
+        botao.disabled = false;
+
+        botao.textContent =
+
+          '✓ CONFIRMAR DEVOLUÇÃO';
+
+
+        mostrarSucesso(
+
+          '✅ DEVOLUÇÃO REGISTRADA\\n\\n' +
+
+          'Colaborador: ' +
+
+          resultado.colaborador +
+
+          '\\nFerramentas: ' +
+
+          resultado.quantidade +
+
+          '\\nData/hora: ' +
+
+          resultado.dataHora
+
+        );
+
+
+        limparFormularioDevolucao();
+
+
+        atualizarDadosLocais();
+
+
+      })
+
+      .withFailureHandler(function(erro) {
+
+
+        botao.disabled = false;
+
+        botao.textContent =
+
+          '✓ CONFIRMAR DEVOLUÇÃO';
+
+
+        mostrarErro(
+
+          erro.message ||
+
+          'Erro ao registrar devolução.'
+
+        );
+
+
+      })
+
+      .registrarDevolucao(dados);
+
+  }
+
+
+
+  function limparFormularioDevolucao() {
+
+    document.getElementById(
+
+      'colaboradorDevolucao'
+
+    ).value = '';
+
+
+    document.getElementById(
+
+      'observacaoDevolucao'
+
+    ).value = '';
+
+
+    document.getElementById(
+
+      'listaDevolucao'
+
+    ).innerHTML =
+
+      '<div class="vazio">' +
+
+      'Selecione um colaborador para consultar.' +
+
+      '</div>';
+
+
+    document.getElementById(
+
+      'areaDevolucao'
+
+    ).style.display = 'none';
+
+
+    limparAssinaturaDevolucao();
+
+  }
+
+
+
+  /**************************************************
+
+   * POSSE
+
+   **************************************************/
+
+  function renderizarPosse() {
+
+    const filtro =
+
+      document.getElementById(
+
+        'filtroPosse'
+
+      ).value;
+
+
+    const lista =
+
+      document.getElementById(
+
+        'listaPosse'
+
+      );
+
+
+    let dados = posse.slice().sort(function(a, b) {
+      return (b.atrasada ? 1 : 0) - (a.atrasada ? 1 : 0);
+    });
+
+
+    if (filtro) {
+
+      dados = dados.filter(function(item) {
+
+        return item.colaborador === filtro;
+
+      });
+
+    }
+
+
+    if (!dados.length) {
+
+      lista.innerHTML =
+
+        '<div class="vazio">' +
+
+        '✅ Nenhuma ferramenta em posse.' +
+
+        '</div>';
+
+
+      return;
+
+    }
+
+
+    lista.innerHTML = '';
+
+
+    dados.forEach(function(item) {
+
+
+      const div =
+
+        document.createElement('div');
+
+
+      div.className =
+
+        'posse-item';
+
+
+      div.innerHTML =
+
+        '<strong>' +
+
+        escapeHtml(item.codigo) +
+
+        ' — ' +
+
+        escapeHtml(item.ferramenta) +
+
+        '</strong>' +
+
+
+        '<div class="posse-meta">' +
+
+          '👷 ' +
+
+          escapeHtml(item.colaborador) +
+
+          '<br>' +
+
+          '📋 ' +
+
+          escapeHtml(item.tarefa) +
+
+          '<br>' +
+
+          '📅 Saída: ' +
+
+          escapeHtml(item.dataSaida) +
+
+        '</div>' +
+
+        (item.atrasada
+          ? '<div class="badge-atrasada">⚠️ DEVOLUÇÃO ATRASADA</div>'
+          : '');
+
+
+      lista.appendChild(div);
+
+    });
+
+  }
+
+
+
+  /**************************************************
+
+   * HISTÓRICO
+
+   **************************************************/
+
+  function carregarHistorico() {
+
+    const lista = document.getElementById('listaHistorico');
+    lista.innerHTML = '<div class="vazio">Carregando...</div>';
+
+    const tipo = document.getElementById('filtroHistoricoTipo')
+      ? document.getElementById('filtroHistoricoTipo').value
+      : '';
+
+    const colaborador = document.getElementById('filtroHistoricoColaborador')
+      ? document.getElementById('filtroHistoricoColaborador').value
+      : '';
+
+    const busca = document.getElementById('filtroHistoricoBusca')
+      ? document.getElementById('filtroHistoricoBusca').value.trim()
+      : '';
+
+    google.script.run
+      .withSuccessHandler(function(dados) {
+
+        if (!dados || !dados.length) {
+          lista.innerHTML = '<div class="vazio">Nenhuma movimentação encontrada.</div>';
+          return;
+        }
+
+        lista.innerHTML = '';
+
+        dados.forEach(function(item) {
+          const div = document.createElement('div');
+          div.className = 'linha-historico';
+
+          div.innerHTML =
+            '<div>' +
+              '<span class="badge">' + escapeHtml(item.tipo) + '</span>' +
+              '<strong>' + escapeHtml(item.codigo) + '</strong>' +
+            '</div>' +
+            '<div style="margin-top:5px;">' + escapeHtml(item.ferramenta) + '</div>' +
+            '<div class="posse-meta">' +
+              '👷 ' + escapeHtml(item.colaborador) + ' · 📋 ' + escapeHtml(item.tarefa) +
+              '<br>📅 ' + escapeHtml(item.dataHora) +
+              ' · Condição: ' + escapeHtml(item.condicao) +
+            '</div>';
+
+          if (item.observacao) {
+            div.innerHTML +=
+              '<div style="margin-top:5px;">📝 ' + escapeHtml(item.observacao) + '</div>';
+          }
+
+          if (item.assinatura) {
+            div.innerHTML +=
+              '<div style="margin-top:5px;">' +
+              '<a href="' + escapeHtml(item.assinatura) + '" target="_blank">' +
+              '✍️ Ver assinatura</a></div>';
+          }
+
+          lista.appendChild(div);
+        });
+      })
+      .withFailureHandler(mostrarErro)
+      .consultarHistorico({
+        limite: 300,
+        tipo: tipo,
+        colaborador: colaborador,
+        busca: busca
+      });
+  }
+
+
+  /**************************************************
+
+   * ATUALIZA DADOS DO SISTEMA
+
+   **************************************************/
+
+  function atualizarDadosLocais() {
+
+    google.script.run
+
+      .withSuccessHandler(function(dados) {
+
+
+        ferramentas =
+
+          dados.ferramentas || [];
+
+
+        ferramentasTodas =
+
+          dados.ferramentasTodas || [];
+
+
+        colaboradores =
+
+          dados.colaboradores || [];
+
+
+        posse =
+
+          dados.posse || [];
+
+        resumo = dados.resumo || resumo;
+
+
+        preencherColaboradores();
+renderizarResumo();
+        renderizarPosse();
+
+
+      })
+
+      .withFailureHandler(mostrarErro)
+
+      .carregarDados();
+
+  }
+
+
+
+  /**************************************************
+
+   * CANVAS
+
+   **************************************************/
+
+  function obterPosicaoCanvas(e, canvas) {
+
+    const rect =
+
+      canvas.getBoundingClientRect();
+
+
+    return {
+
+      x: e.clientX - rect.left,
+
+      y: e.clientY - rect.top
+
+    };
+
+  }
+
+
+
+  /**************************************************
+
+   * MENSAGENS
+
+   **************************************************/
+
+  function mostrarSucesso(texto) {
+
+    const elemento =
+
+      document.getElementById(
+
+        'mensagem'
+
+      );
+
+
+    elemento.innerHTML =
+
+      escapeHtml(texto)
+
+        .replace(/\n/g, '<br>');
+
+
+    elemento.className =
+
+      'mensagem sucesso';
+
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: 'smooth'
+
+    });
+
+  }
+
+
+
+  function mostrarErro(erro) {
+
+    const elemento =
+
+      document.getElementById(
+
+        'mensagem'
+
+      );
+
+
+    const texto =
+
+      erro && erro.message
+
+        ? erro.message
+
+        : String(erro || 'Erro desconhecido.');
+
+
+    elemento.innerHTML =
+
+      '⚠️ ' +
+
+      escapeHtml(texto)
+
+        .replace(/\n/g, '<br>');
+
+
+    elemento.className =
+
+      'mensagem erro';
+
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: 'smooth'
+
+    });
+
+  }
+
+
+
+  function esconderMensagem() {
+
+    const elemento =
+
+      document.getElementById(
+
+        'mensagem'
+
+      );
+
+
+    elemento.className =
+
+      'mensagem';
+
+
+    elemento.innerHTML = '';
+
+  }
+
+
+
+  /**************************************************
+
+   * SEGURANÇA DE TEXTO
+
+   **************************************************/
+
+  function escapeHtml(valor) {
+
+    return String(valor || '')
+
+      .replace(/&/g, '&amp;')
+
+      .replace(/</g, '&lt;')
+
+      .replace(/>/g, '&gt;')
+
+      .replace(/"/g, '&quot;')
+
+      .replace(/'/g, '&#039;');
+
+  }
+
+
+
+  function cssEscape(valor) {
+
+    if (window.CSS && CSS.escape) {
+
+      return CSS.escape(valor);
+
+    }
+
+
+    return String(valor)
+
+      .replace(/([ !"#$%&'()*+,./:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+
+  }
+
+</script>
+
+
+</body>
+
+</html>
