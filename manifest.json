@@ -1,14 +1,25 @@
 {
   "name": "Controle de Ferramentas - Grupo 360",
   "short_name": "Ferramentas 360",
+  "description": "Controle de saída, devolução, posse e fichas de ferramentas da Grupo 360 Manutenção.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f2f4f7",
-  "theme_color": "#0b57d0",
-  "description": "Controle de saída, devolução, posse, fichas e histórico de ferramentas do Grupo 360.",
+  "theme_color": "#093272",
+  "orientation": "portrait-primary",
   "icons": [
-    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

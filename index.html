@@ -153,40 +153,74 @@
 
 
     .cabecalho {
-      background: #093272;
+
+      background: #fff;
+
       border-radius: 16px;
-      padding: 22px 18px 18px;
+
+      padding: 18px;
+
       margin-bottom: 12px;
+
       text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,.14);
-      color: #fff;
+
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
     }
 
 
     .logo-cabecalho {
+
       display: block;
-      width: min(100%, 680px);
-      height: auto;
-      max-height: 285px;
+
+      width: min(100%, 560px);
+
+      max-height: 145px;
+
       object-fit: contain;
-      margin: 0 auto 14px;
+
+      margin: 0 auto 10px;
+
     }
 
 
     .cabecalho h1 {
+
       margin: 0;
-      font-size: 26px;
-      color: #fff;
+
+      font-size: 25px;
+
     }
 
 
     .cabecalho p {
+
       margin: 7px 0 0;
-      color: #dbe8f5;
+
+      color: #666;
+
     }
 
 
+    .terminal {
 
+      display: inline-block;
+
+      margin-top: 9px;
+
+      padding: 6px 10px;
+
+      border-radius: 20px;
+
+      background: #e8f0fe;
+
+      color: #174ea6;
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+    }
 
 
     .menu {
@@ -862,10 +896,11 @@
     @media (max-width: 760px) {
       body { padding: 8px; }
       .container { width: 100%; max-width: 100%; }
-      .cabecalho { padding: 14px 10px 12px; border-radius: 14px; }
-      .logo-cabecalho { width: min(100%, 620px); max-height: 190px; margin-bottom: 10px; }
+      .cabecalho { padding: 12px 10px; border-radius: 14px; }
+      .logo-cabecalho { width: min(92%, 430px); max-height: 92px; margin-bottom: 6px; }
       .cabecalho h1 { font-size: clamp(19px, 5.2vw, 25px); line-height: 1.15; }
       .cabecalho p { font-size: 13px; margin-top: 5px; }
+      .terminal { margin-top: 7px; font-size: 11px; padding: 5px 8px; }
       .menu { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
       .menu button { min-width: 0; min-height: 58px; padding: 8px 4px; font-size: 11px; }
       .card { width: 100%; }
@@ -890,19 +925,60 @@
       .resumo-grid { grid-template-columns: 1fr 1fr !important; }
     }
 
+
+/* ===== VISUAL FERRAMENTAS 360 — MESMO PADRÃO DO APP DE EPI ===== */
+body{padding:0 10px 24px;background:#edf3f9;font-family:Arial,Helvetica,sans-serif;color:#222}
+.container{width:100%;max-width:1080px;margin:0 auto;padding:0 10px}
+.cabecalho{position:relative;overflow:hidden;background:#093272;border-radius:0 0 30px 30px;padding:52px 20px 46px;margin:0 -10px 16px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.12);color:#fff}
+.logo-cabecalho{display:block;width:min(92%,720px);height:250px;max-height:none;object-fit:contain;margin:0 auto 20px}
+.cabecalho h1{margin:0;font-size:34px;line-height:1.15;font-weight:800;color:#fff}
+.cabecalho p{margin:14px 0 0;color:#fff;font-size:23px;line-height:1.25}
+.terminal{display:none!important}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 0 16px;padding:0}
+.menu button{min-height:108px;border:0;border-radius:24px;padding:16px 12px;background:#fff;color:#222;box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:800;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px}
+.menu button.ativo{background:#1764d8;color:#fff}
+.menu-icone{font-size:25px;line-height:1;display:inline-flex;align-items:center}
+.card{background:#fff;border-radius:24px;padding:24px;margin-bottom:14px;box-shadow:0 2px 9px rgba(0,0,0,.08)}
+.titulo{margin:0 0 14px;font-size:28px;line-height:1.2;font-weight:800}
+.subtitulo{margin:0 0 16px;color:#666;font-size:19px;line-height:1.35}
+.resumo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.resumo-card{border:1px solid #ddd;border-radius:20px;padding:20px 12px;min-height:122px;text-align:center;background:#fff;display:flex;flex-direction:column;justify-content:center}
+.resumo-numero{font-size:40px;font-weight:800;line-height:1.05}
+.resumo-legenda{margin-top:7px;color:#666;font-size:16px;font-weight:800}
+.alerta-atrasada{border:2px solid #c84b4b;background:#fff7f7}
+.botao{border-radius:16px;min-height:58px;font-size:18px;font-weight:800}
+.primario{background:#1764d8;color:#fff}
+.carregando{font-size:20px;padding:34px}
+.mensagem{border-radius:18px;font-size:17px}
+@media(max-width:700px){
+ body{padding:0 10px 18px}
+ .container{padding:0 4px}
+ .cabecalho{margin:0 -10px 16px;border-radius:0 0 30px 30px;padding:58px 18px 48px}
+ .logo-cabecalho{width:92%;height:245px;margin-bottom:24px}
+ .cabecalho h1{font-size:34px}
+ .cabecalho p{font-size:23px;margin-top:14px}
+ .menu{grid-template-columns:repeat(2,1fr);gap:14px}
+ .menu button{min-height:108px;border-radius:24px;font-size:21px;gap:10px}
+ .menu-icone{font-size:24px}
+ .card{border-radius:24px;padding:22px 18px}
+ .titulo{font-size:28px}
+ .subtitulo{font-size:19px}
+ .resumo-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+ .resumo-card{min-height:122px;border-radius:20px}
+ .resumo-numero{font-size:40px}
+ .resumo-legenda{font-size:16px}
+}
 </style>
 
 
-  <meta name="theme-color" content="#093272">
+  <meta name="theme-color" content="#0b2a4a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Ferramentas 360">
-  <link rel="icon" href="./favicon.ico?v=4" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=4">
-  <link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png?v=4">
-  <link rel="manifest" href="./manifest.json?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.json">
 
 </head>
 
@@ -919,8 +995,7 @@
 
     <h1>🔧 CONTROLE DE FERRAMENTAS</h1>
 
-    <p>Grupo 360 Manutenção</p>
-
+    <p>Saída, devolução e controle das ferramentas</p>
 
   </div>
 
@@ -929,40 +1004,40 @@
 
     <button id="menuInicio" onclick="abrirTela('inicio')">
 
-      🏠<br>INÍCIO
+      <span class="menu-icone">🏠</span><span>Início</span>
 
     </button>
 
     <button id="menuSaida" onclick="abrirTela('saida')">
 
-      📤<br>SAÍDA
+      <span class="menu-icone">🧰</span><span>Saída</span>
 
     </button>
 
 
     <button id="menuDevolucao" onclick="abrirTela('devolucao')">
 
-      📥<br>DEVOLUÇÃO
+      <span class="menu-icone">↩️</span><span>Devolução</span>
 
     </button>
 
 
     <button id="menuPosse" onclick="abrirTela('posse')">
 
-      👷<br>EM POSSE
+      <span class="menu-icone">👷</span><span>Em posse</span>
 
     </button>
 
     <button id="menuCautela" onclick="abrirTela('cautela')">
 
-      📋<br>FICHAS
+      <span class="menu-icone">📋</span><span>Fichas</span>
 
     </button>
 
 
     <button id="menuHistorico" onclick="abrirTela('historico')">
 
-      📋<br>HISTÓRICO
+      <span class="menu-icone">🕘</span><span>Histórico</span>
 
     </button>
 
